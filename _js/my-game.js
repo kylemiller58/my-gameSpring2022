@@ -229,7 +229,7 @@ function update() {
     player.update();
     if (this.x > WIDTH-this.w) {
         this.x = WIDTH-this.w;
-    }
+    // } adding changes
 }
 
 function draw() {
