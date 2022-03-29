@@ -69,6 +69,45 @@ class Square {
         ctx.fillRect(this.x, this.y, this.w, this.h);
     }
 }
+class Player {
+    constructor(x, y, w, h, color) {
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
+        this.color = color;
+        this.speed = 3;
+        allSprites.push(this);
+    }
+    input() {
+        if ("w" in keysDown) {
+            this.y-=this.speed;
+    }
+    input()
+        if ("a" in keysDown) {
+            this.x-=this.speed;
+    }
+    input() 
+        if ("s" in keysDown) {
+            this.y+=this.speed;
+    }
+    input()
+        if ("d" in keysDown) {
+            this.x+=this.speed;
+     }
+    }
+    update() {
+        this.input();
+        if (this.x > WIDTH || this.x < 0 || this.y < 0 || this.y > HEIGHT){
+            this.speed*=-1; 
+        }
+    }
+    draw() {
+        ctx.fillStyle = this.color;
+        ctx.fillRect(this.x, this.y, this.w, this.h);
+    }
+}
+
 class Circle {
     constructor(x, y, w, h, color) {
         this.x = x;
@@ -173,12 +212,25 @@ function init() {
 
 
 
-
+let player = new Player (WIDTH/2, HEIGHT/2, 64, 64, 'rgb(255, 255, 0)');
 let spongeBob = new Square(10, 10, 30, 30, 'rgb(255, 255, 0)');
 let patrick = new Square(10, 30, 65, 65, 'rgb(255, 150, 150)');
 let squidward = new Square(70, 90, 20, 20, 'rgb(0, 200, 200)');
 let sandy = new Circle(70, 200, 25, 40, 'rgb(150, 75, 0)');
 
+function input() {
+
+}
+
+function update() {
+    // for (i of allSprites){
+    //     i.update();
+    // }
+    player.update();
+    if (this.x > WIDTH-this.w) {
+        this.x = WIDTH-this.w;
+    }
+}
 
 function draw() {
     ctx.clearRect(0, 0, WIDTH, HEIGHT);
@@ -186,14 +238,6 @@ function draw() {
         i.draw();
     }
 }
-
-function update() {
-    spongeBob.update();
-    patrick.update();
-    squidward.update();
-    sandy.update();
-}
-
 
 function gameLoop(){
     // console.log('the game loop is alive!!!');
